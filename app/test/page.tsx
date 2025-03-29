@@ -9,7 +9,7 @@ export default  function Test() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await fetch('/api/scrape?url=https://www.amazon.com/Coco-Eve-Self-Tanner-Mousse/dp/B08G1LDFL8?pd_rd_w=xOKW2&content-id=amzn1.sym.6199b410-4788-4f34-8996-b2bde5f9e45c&pf_rd_p=6199b410-4788-4f34-8996-b2bde5f9e45c&pf_rd_r=CYGXGGGXKPCVQ2DTFWAX&pd_rd_wg=6CqSn&pd_rd_r=03a694a8-451a-423d-a21d-96746074b884&pd_rd_i=B08G1LDFL8&th=1');
+        const response = await fetch('/api/scrape?url=https://www.amazon.com/Excalibur-9-Tray-Food-Dehydrator-Black/dp/B004Z915M4?th=1');
         const data = await response.json();
 
         if (response.ok) {
@@ -37,10 +37,11 @@ export default  function Test() {
         <div>
           <h2>{productData.title}</h2>
           <h2>{productData.url}</h2>
-          <p>Price: {productData.currency} {productData.currentPrice}</p>
+          <p>Price: {productData.currentPrice}</p>
+          <p>brand: {productData.brand}</p>
           <p>Reviews: {productData.reviewsCount}</p>
           <p>Stars: {productData.stars}</p>
-          <p>{productData.isOutOfStock ? 'Out of Stock' : 'In Stock'}</p>
+          <p>{productData.availability ? 'Out of Stock' : 'In Stock'}</p>
           <img src={productData.image} alt={productData.title} />
           <p>originalPrice: {productData.originalPrice}</p>
           <p>currentPrice: {productData.currentPrice}</p>

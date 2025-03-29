@@ -72,8 +72,8 @@ export function extractCurrencySymbol(element: any): string {
   
 export function extractDescription($: any): string {
   const selectors = [
-    ".a-unordered-list .a-list-item",
     "#productDescription",
+    ".a-unordered-list .a-spacing-mini .a-list-item",
     ".a-expander-content p",
 
       // You can add more selectors if the description is found in other parts.
@@ -134,3 +134,17 @@ export function formatNumber(num: number = 0, currency: string = ""): string {
     product.averagePrice = getAveragePrice(updatedHistory);
   }
    
+
+ export function extractASIN(url: string): string | null {
+    try {
+      const urlObj = new URL(url);
+      const parts = urlObj.pathname.split("/");
+      const asinIndex = parts.indexOf("dp") + 1;
+  
+      return asinIndex > 0 && asinIndex < parts.length ? parts[asinIndex] : null;
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+  
